@@ -1,27 +1,22 @@
-// business logic
-var leapYear = function(year) {
-  if((year % 4 === 0) && (year % 100 !== 0) || (year % 400 === 0)) {
-    return true;
-  } else {
-  return false;
-  }
-};
+// var LeapYear = require('./../src/leapyear-logic.js').leapYearModule;
+import './../src/styles.css';
+import $ from 'jquery';
+import 'bootstrap';
+import { LeapYear } from './../src/leapyear-logic.js';
 
-// user input logic
 $().ready(function() {
   $("form#leap-year").submit(function(event){
     event.preventDefault();
     var year = parseInt($("input#year").val());
-    var result = leapYear(year);
+    var leapYear = new LeapYear(year);
+    var result = leapYear.isLeapYear();
 
     $(".year").text(year);
-
     if (!result) {
       $(".not").text("not");
     } else {
       $(".not").text("");
     }
-
     $("#result").show();
   });
 });
